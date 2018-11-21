@@ -1,6 +1,27 @@
 <htmL>
 <head>
     <title>page2</title>
+    <style>
+        input[type=text],input[type=number], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+input[type=button],input[type=button]{
+    background-color: #45a049;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+    </style>
 </head>
 <script src="jquery-3.3.1.min.js"></script>
 <script>
@@ -66,11 +87,13 @@ $(document).ready(function(){
                     </select>
                 </td>
             </tr>
-          
+          <tr>
+              <td></td>
+          </tr>
             <tr>
-                <td></td>
-                <td></td>
+                
               <td><input type="button" id="save" value="save"></td>
+              
               <td><a href="page1.html"><input type="button" id="cancel" value="cancel"></a></td>
             </tr>
         </table>
