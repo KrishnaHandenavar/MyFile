@@ -1,0 +1,83 @@
+<htmL>
+
+<head>
+    <title>page1</title>
+    <style>
+        table {
+    border-collapse: collapse;
+    width: 100%;
+}
+    th, td {
+    padding: 15px;
+}
+th{
+background-color:yellow;
+}
+    
+    </style>
+</head>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    var id;
+    var id_all;
+    $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: "http://172.104.190.30:7777/api/v1/users",
+                datatype: 'JSON',
+                success: function (response) {
+                    var y= response.data.length;
+                    /*var y='';
+                    for (var i = 0; i < x; i++) {
+                        if(response.data[i].name!=undefined)
+                        {
+                        y+=response.data[i].name+" ";
+                        }
+                    }
+                    console.log(y); */
+
+                   /*  var arr_obj=[{name:"krishna", age:25},{name:"kiran", age:18},{name:"ashok", age:27}]
+                    var name=arr_obj.map(x=>x.name);
+                    console.log(name); */
+                    var data=response.data;
+                    var name=data.map(x=>x.name);
+                    var email=data.map(x=>x.email);
+                    var phone=data.map(x=>x.phone);
+                    var address=data.map(x=>x.address);
+                    var gender=data.map(x=>x.gender);
+                    
+                      var id=data.map(x=>x._id);
+                      
+                    
+                    var myTable='<table border=1>';
+                    myTable+='<tr><th>Name</th><th>Email</th><th>phoneNumber</th><th>Address</th><th>Gender</th><th></th><th></th></tr>';
+                 for(var i=0;i<name.length;i++)
+                 {
+                     myTable+='<tr id=i><td>'+name[i]+'</td><td>'+email[i]+'</td><td>'+phone[i]+'</td><td>'+address[i]+'</td><td>'+gender[i]+'</td><td>'+
+                     '<a href=page3.html?id='+id[i]+'><img src="edicao-simbolo-interface-de-um-lapis-em-um-papel-contorno-quadrado_318-61160.jpg" height=20px width=20px ></a></td>'+
+                     '<td><a href=delete.html?id='+id[i]+'><img src="010_trash-2-512.png" height=20px width=20px ></a></td><tr>';
+
+                 }
+                 myTable+='</table>';
+                   $('#result').append(myTable);
+                },
+                error: function () {
+                    console.log("error");
+                }
+            
+        });
+        
+
+    });
+ 
+
+</script>
+
+<body>
+        
+    <a href="file:///home/developer/Desktop/krishna/page2.html"><input type="button" value="add" background-color="red"></a>       
+    <div id="result"></div><br>
+   
+</body>
+
+</htmL>
