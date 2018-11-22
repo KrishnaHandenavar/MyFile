@@ -1,0 +1,130 @@
+<htmL>
+
+<head>
+    <title>page3</title>
+    <style>
+        input[type=text],input[type=number], select, textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 16px;
+                resize: vertical;
+            }
+            input[type=button],input[type=button]{
+                background-color: #45a049;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            
+                </style>
+</head>
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var url = window.location.href;
+        var x = url.split('?');
+        console.log(x);
+        var id = x[1].split('=');
+        var id_ = id[1];
+
+        var url_ = "http://172.104.190.30:7777/api/v1/users/" + id_;
+        $.ajax({
+            type: 'GET',
+            url: url_,
+            datatype: 'JSON',
+            success: function (response) {
+                var data = response.data;
+                $('#name').val(data.name);
+                $('#email').val(data.email);
+                $('#phone').val(data.phone);
+                $('#address').val(data.address);
+                $('#gender').val((data.gender).toUpperCase());
+                /*$(document).ready(function () {
+                    $("#save").click(function(){
+                    
+                });
+                
+            });*/
+            },
+            error: function () {
+                console.log("error")
+            }
+        });
+        $(document).ready(function () {
+            $("#save").click(function () {
+
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var phone = $("#phone").val();
+                var address = $("#address").val();
+                var gender = $("#gender").val();
+                data_obj = { "name": name, "email": email, "phone": phone, "address": address, "gender": gender }
+
+                console.log(data_obj);
+
+                $.ajax({
+                    type: 'PUT',
+                    url: url_,
+                    data: data_obj,
+                    dataType: 'JSON',
+                    cache: false,
+                    success: function (response) {
+                        window.location.href = "page1.html";
+                    },
+                    error: function () {
+                        console.log("error");
+                    }
+                });
+
+            });
+
+        });
+    });
+
+</script>
+
+<body>
+    <table align="center">
+        <tr>
+            <td><label>Name:</label></td>
+            <td><input type="text" id="name"></td>
+        </tr>
+        <tr>
+            <td><label>Email:</label></td>
+            <td><input type="text" id="email"></td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td><input type="number" id="phone"></td>
+        </tr>
+
+        <tr>
+            <td>Address:</td>
+            <td><textarea rows="7" cols="38" id="address"></textarea></td>
+        </tr>
+        <tr>
+            <td><label>Gender:</label></td>
+            <td><select id="gender">
+                    <option value="MALE">MALE</option>
+                    <option value="FEMALE">FEMALE</option>
+                    <option value="OTHERS">OTHERS</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <td><input type="button" id="save" value="save"></td>
+            <td><a href="page1.html"><input type="button" id="cancel" value="cancel"></a></td>
+        </tr>
+    </table>
+
+
+</body>
+
+</htmL>
